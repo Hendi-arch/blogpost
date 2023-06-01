@@ -33,7 +33,7 @@ Run the application
 
 The application will start running on **http://localhost:2222**
 
-# API Documentation
+## API Documentation
 The API documentation is available in the API Specification file `api-spec.yaml` or you can visit **[Swagger](https://app.swaggerhub.com/apis/HENDINOF22/blog-api/1.1.0)**.
 
 ## How To Use
