@@ -10,7 +10,7 @@ This is a simple RESTful API for a blog application built with Spring Boot and S
 Clone the project
 
 ```bash
-  git clone git clone https://github.com/your-username/blog-application.git
+  git clone git clone https://github.com/Hendi-arch/blogpost.git
 ```
 
 Go to the project directory
