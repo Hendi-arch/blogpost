@@ -1,7 +1,7 @@
 openapi: 3.0.0
 info:
   title: Blog API
-  version: 1.0.0
+  version: 1.1.0
 paths:
   /api/blog-posts/createBlogPosts:
     post:
@@ -11,26 +11,44 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BlogPostRequest"
+              $ref: "#/components/schemas/request/BlogPost"
       responses:
         "201":
           description: Created
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BlogPostResponse"
+                $ref: "#/components/schemas/response/BlogPostResponse"
   /api/blog-posts/findAllBlogPosts:
     get:
       summary: Retrieve all blog posts
+      parameters:
+        - in: query
+          name: page
+          schema:
+            type: integer
+            default: 0
+          description: Page number
+        - in: query
+          name: size
+          schema:
+            type: integer
+            default: 25
+          description: Number of items per page
+        - in: query
+          name: sort_by
+          schema:
+            type: array
+            items:
+              type: string
+          description: Sort order (e.g., id:asc, title:desc)
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                type: array
-                items:
-                  $ref: "#/components/schemas/BlogPostResponse"
+                $ref: "#/components/schemas/response/BlogPostResponse"
   /api/blog-posts/{id}:
     get:
       summary: Retrieve a blog post by ID
@@ -47,7 +65,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BlogPostResponse"
+                $ref: "#/components/schemas/response/BlogPostResponse"
         "404":
           description: Not Found
     put:
@@ -64,14 +82,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: "#/components/schemas/BlogPostRequest"
+              $ref: "#/components/schemas/request/BlogPost"
       responses:
         "200":
           description: OK
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/BlogPostResponse"
+                $ref: "#/components/schemas/response/BlogPostResponse"
         "404":
           description: Not Found
     delete:
@@ -90,23 +108,40 @@ paths:
           description: Not Found
 components:
   schemas:
-    BlogPostRequest:
-      type: object
-      properties:
-        title:
-          type: string
-        body:
-          type: string
-        author:
-          type: string
-    BlogPostResponse:
-      type: object
-      properties:
-        id:
-          type: integer
-        title:
-          type: string
-        body:
-          type: string
-        author:
-          type: string
+    request:
+      BlogPost:
+        type: object
+        properties:
+          title:
+            type: string
+          body:
+            type: string
+          author:
+            type: string
+    response:
+      BlogPostResponse:
+        type: object
+        properties:
+          statusCode:
+            type: integer
+          message:
+            type: string
+          infoData:
+            type: object
+            additionalProperties:
+              type: object
+          data:
+            type: array
+            items:
+              $ref: "#/components/schemas/response/BlogPostEntity"
+      BlogPostEntity:
+        type: object
+        properties:
+          id:
+            type: integer
+          title:
+            type: string
+          body:
+            type: string
+          author:
+            type: string

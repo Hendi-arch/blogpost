@@ -34,7 +34,7 @@ Run the application
 The application will start running on **http://localhost:2222**
 
 # API Documentation
-The API documentation is available in the API Specification file `api-spec.yaml` or you can visit **https://app.swaggerhub.com/apis-docs/HENDINOF22/blog-api/1.0.0**.
+The API documentation is available in the API Specification file `api-spec.yaml` or you can visit **[Swagger](https://app.swaggerhub.com/apis/HENDINOF22/blog-api/1.1.0)**.
 
 ## How To Use
 1. Create a blog post
@@ -50,8 +50,14 @@ Send a POST request to `/api/blog-posts/createBlogPosts` with the following JSON
 2. Retrieve a single blog post
 Send a GET request to `/api/blog-posts/{id}` where `{id}` is the ID of the blog post.
 
+<!--
+@RequestParam(defaultValue = "0") int page,
+@RequestParam(defaultValue = "25") int size,
+@RequestParam(defaultValue = "id:asc", name = "sort_by") String[] sort
+-->
+
 3. Retrieve a list of all blog posts
-Send a GET request to `/api/blog-posts/findAllBlogPosts`.
+Send a GET request to `/api/blog-posts/findAllBlogPosts?page=0&size=25&sort_by=id:desc`.
 
 4. Update a blog post
 Send a PUT request to `/api/blog-posts/{id}` where `{id}` is the ID of the blog post, with the following JSON payload:
