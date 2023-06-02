@@ -6,7 +6,7 @@ WORKDIR /application
 COPY . .
 
 # Build artifact
-RUN mvn clean package -Dmaven.test.skip=true
+RUN mvn clean package
 
 # Stage 2
 FROM eclipse-temurin:17.0.7_7-jre AS builder
