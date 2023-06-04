@@ -38,6 +38,8 @@ public class BlogPostControllerTests {
     @MockBean
     private IBlogPostRepository iBlogPostRepository;
 
+    // TODO: Implement bearer for authentication testing
+
     @Test
     public void createBlogPosts_ReturnsCreatedStatus() throws Exception {
         // Mock the repository behavior

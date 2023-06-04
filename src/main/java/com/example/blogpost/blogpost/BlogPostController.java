@@ -20,6 +20,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.blogpost.response.BlogPostResponse;
+
 import jakarta.validation.Valid;
 
 import org.springframework.web.bind.annotation.PutMapping;
@@ -50,6 +52,26 @@ public class BlogPostController {
         List<Order> orders = BlogPostHelper.configureSortParameters(sort);
         Pageable pageableRequest = PageRequest.of(page, size, Sort.by(orders));
         Page<BlogPostEntity> pageableBlogPostsData = iBlogPostRepo.findAll(pageableRequest);
+        List<BlogPostEntity> blogPostsData = pageableBlogPostsData.getContent();
+        Map<String, Object> infoData = Map.of("currentPage", pageableBlogPostsData.getNumber(), "totalItems",
+                pageableBlogPostsData.getTotalElements(), "totalPages", pageableBlogPostsData.getTotalPages());
+        if (blogPostsData.isEmpty()) {
+            return new ResponseEntity<>(BlogPostResponse.buildNotFound(infoData), HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(BlogPostResponse.buildOk(blogPostsData, infoData), HttpStatus.OK);
+    }
+
+    @GetMapping("/findAllBlogPosts/{id}")
+    public ResponseEntity<BlogPostResponse> findAllBlogPostsByUserId(
+            @PathVariable Integer id,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "25") int size,
+            @RequestParam(defaultValue = "id:asc", name = "sort_by") String[] sort) {
+
+        List<Order> orders = BlogPostHelper.configureSortParameters(sort);
+        Pageable pageableRequest = PageRequest.of(page, size, Sort.by(orders));
+        Page<BlogPostEntity> pageableBlogPostsData = iBlogPostRepo.findByUserId(id, pageableRequest);
         List<BlogPostEntity> blogPostsData = pageableBlogPostsData.getContent();
         Map<String, Object> infoData = Map.of("currentPage", pageableBlogPostsData.getNumber(), "totalItems",
                 pageableBlogPostsData.getTotalElements(), "totalPages", pageableBlogPostsData.getTotalPages());

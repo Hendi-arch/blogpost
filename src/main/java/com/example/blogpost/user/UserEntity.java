@@ -1,4 +1,4 @@
-package com.example.blogpost.blogpost;
+package com.example.blogpost.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,28 +15,22 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-
-@Entity(name = "blog_posts")
-public class BlogPostEntity {
+@Entity(name = "users")
+public class UserEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
     @NotBlank
-    @Column(length = 100, nullable = false)
-    private String title;
+    @Column(nullable = false, length = 25, unique = true)
+    private String username;
 
     @NotBlank
-    @Column(length = 500, nullable = false)
-    private String body;
+    @Column(nullable = false, length = 100)
+    private String password;
 
-    @NotBlank
-    @Column(length = 50, nullable = false)
-    private String author;
-
-    @NotBlank
-    @Column(name = "user_id", nullable = false)
-    private Integer userId;
+    @Builder.Default
+    private String role = "USER";
 
 }
