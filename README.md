@@ -1,13 +1,16 @@
 
 # Blog Application
+
 This is a simple RESTful API for a blog application built with Spring Boot and Spring Data JPA. The API allows users to create, retrieve, update, and delete blog posts.
 
 ## Prerequisites
+
 - Java JDK 17 or higher
 - Apache Maven
 - Docker (optional)
 
 ## Run Locally
+
 Clone the project
 
 ```bash
@@ -32,9 +35,10 @@ Run the application:
   mvn spring-boot:run
 ```
 
-The application will start running on **http://localhost:2222**.
+The application will start running on **<http://localhost:2222>**.
 
 ## Build and Run with Docker
+
 If you have Docker installed, you can also build and run the application using Docker.
 
 Build the Docker image:
@@ -49,14 +53,17 @@ Run the Docker container:
   docker run -p 2222:2222 blog-application
 ```
 
-The application will be accessible at **http://localhost:2222**.
+The application will be accessible at **<http://localhost:2222>**.
 
 ## API Documentation
+
 The API documentation is available in the API Specification file `api-spec.yaml` or you can visit **[Swagger](https://app.swaggerhub.com/apis/HENDINOF22/blog-api/1.1.0)**.
 
 ## How To Use
+
 1. Create a blog post
 Send a POST request to `/api/blog-posts/createBlogPosts` with the following JSON payload:
+
 ```json
 {
   "title": "Example Title",
@@ -73,6 +80,7 @@ Send a GET request to `/api/blog-posts/findAllBlogPosts?page=0&size=25&sort_by=i
 
 4. Update a blog post
 Send a PUT request to `/api/blog-posts/{id}` where `{id}` is the ID of the blog post, with the following JSON payload:
+
 ```json
 {
   "title": "Updated Title",
@@ -85,6 +93,7 @@ Send a PUT request to `/api/blog-posts/{id}` where `{id}` is the ID of the blog 
 Send a DELETE request to `/api/blog-posts/{id}` where `{id}` is the ID of the blog post.
 
 ## Tech Stack
+
 - Spring Boot
 - Spring Data JPA
 - H2 Database (in-memory)
